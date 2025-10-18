@@ -1,50 +1,142 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report - Constitution Update
+Version: 0.0.0 → 1.0.0 (Initial ratification)
+Date: 2025-10-18
+
+Changes:
+- Initial constitution created for goterm project
+- Added 5 core principles: Go Idioms, Terminal Interface Design, Testing Discipline, Simplicity, API Stability
+- Added Development Standards section
+- Added Quality Gates section
+- Governance rules established
+
+Templates Status:
+✅ plan-template.md - Constitution Check section compatible
+✅ spec-template.md - Requirements sections align with principles
+✅ tasks-template.md - Task organization supports testing discipline and parallel development
+⚠️ No updates needed - templates are generic and compatible
+
+Follow-up: None
+-->
+
+# goterm Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Go Idioms and Best Practices
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+All code MUST follow established Go conventions and idioms:
+- Use `gofmt` and `go vet` on all code before commits
+- Follow effective Go guidelines for naming, structure, and error handling
+- Prefer composition over inheritance; use interfaces for abstraction
+- Handle errors explicitly; never ignore errors without documented justification
+- Use standard library first; external dependencies require justification
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+**Rationale**: Go's strength lies in its simplicity and consistency. Following community conventions ensures maintainability and reduces cognitive load.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Terminal Interface Design
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+Terminal interfaces MUST prioritize usability and composability:
+- Support both human-readable and machine-parseable output formats
+- Accept input via stdin, command arguments, and flags
+- Write normal output to stdout, errors to stderr
+- Return meaningful exit codes (0 = success, non-zero = specific failure)
+- Enable piping and composition with other Unix tools
+- Provide `--help` and `--version` flags for all commands
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+**Rationale**: Terminal tools are building blocks. They must be composable, scriptable, and follow Unix philosophy for maximum utility.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### III. Testing Discipline
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Testing is mandatory for all production code:
+- Write tests BEFORE or DURING implementation (not after)
+- Achieve minimum 80% code coverage for new packages
+- Use table-driven tests for multiple input scenarios
+- Include both unit tests and integration tests where appropriate
+- Ensure all tests pass before merging to main branch
+- Tests MUST be fast (<1s for unit tests, <10s for integration)
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+**Rationale**: Go's testing tools make TDD natural. Early testing catches design issues and prevents regressions, ensuring code quality and maintainability.
+
+### IV. Simplicity and Clarity (YAGNI)
+
+Start simple and add complexity only when justified:
+- Implement only what is needed for current requirements
+- Prefer straightforward solutions over clever abstractions
+- Keep functions small and focused (prefer <50 lines)
+- Avoid premature optimization; measure before optimizing
+- Document WHY for non-obvious decisions, not WHAT
+
+**Rationale**: Go was designed for simplicity. Premature abstraction creates maintenance burden. Simple code is easier to understand, test, and modify.
+
+### V. API Stability and Versioning
+
+Public APIs require stability guarantees:
+- Use semantic versioning (MAJOR.MINOR.PATCH)
+- Document breaking changes explicitly in CHANGELOG
+- Maintain backward compatibility within major versions
+- Deprecate before removal (minimum one minor version warning)
+- Mark experimental features clearly in documentation
+- Use Go modules for dependency management
+
+**Rationale**: Consumers of goterm libraries and tools need predictability. Semantic versioning and stability commitments build trust and enable safe upgrades.
+
+## Development Standards
+
+### Code Quality
+- All code MUST pass `go fmt`, `go vet`, and configured linters
+- All exported functions and types MUST have godoc comments
+- Critical paths MUST have error handling with context
+- Resource cleanup MUST use `defer` appropriately
+
+### Performance
+- Avoid unnecessary allocations in hot paths
+- Use benchmarking (`go test -bench`) for performance-critical code
+- Profile before optimizing (use `pprof` for CPU/memory analysis)
+- Document performance characteristics for public APIs
+
+### Security
+- Never log sensitive data (credentials, tokens, PII)
+- Validate all external inputs
+- Use Go's crypto packages for cryptographic operations
+- Keep dependencies updated for security patches
+
+## Quality Gates
+
+All features MUST pass these gates before merging:
+
+1. **Code Review**: At least one approval from project maintainer
+2. **Tests Pass**: All tests green on CI (unit + integration)
+3. **Coverage**: New code meets 80% coverage minimum
+4. **Lint Clean**: No warnings from `go vet` or configured linters
+5. **Documentation**: Public APIs documented with examples where helpful
+6. **Constitution Compliance**: Violates no principles, or violations justified in PR
+
+### Complexity Justification
+
+Violations of Simplicity (Principle IV) or introduction of non-standard patterns MUST be justified in pull requests with:
+- Problem statement: What cannot be solved simply?
+- Simpler alternatives considered and why they were insufficient
+- Maintenance plan: How will this complexity be managed?
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### Amendment Process
+- Constitution changes require documentation of rationale
+- Breaking principle changes require team consensus
+- Version bump follows semantic versioning:
+  - **MAJOR**: Principle removal or backward-incompatible governance change
+  - **MINOR**: New principle added or significant clarification
+  - **PATCH**: Typo fixes, wording improvements, non-semantic updates
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### Enforcement
+- All pull requests MUST verify constitution compliance
+- Reviewers MUST check Quality Gates before approval
+- CI pipeline MUST enforce automated gates (tests, lint, coverage)
+
+### Living Document
+- Constitution should evolve with project needs
+- Amendments MUST be committed with version update
+- Use CLAUDE.md for development guidance that doesn't warrant constitution inclusion
+
+**Version**: 1.0.0 | **Ratified**: 2025-10-18 | **Last Amended**: 2025-10-18
