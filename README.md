@@ -1,9 +1,21 @@
 # goterm
 
-A powerful, feature-rich Go library for building terminal user interfaces with comprehensive color support, text styling, and screen buffer management.
-
 [![Go Version](https://img.shields.io/badge/Go-1.25.3+-00ADD8?style=flat&logo=go)](https://go.dev/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
+ > **⚠️ ALPHA SOFTWARE WARNING**
+ >
+ > This project is currently in alpha stage. While we strive for quality and stability, you should expect:
+ > - Potential bugs and rough edges
+ > - Breaking API changes without prior notice
+ > - Incomplete documentation in some areas
+ > - Features that may be refined or removed
+ >
+ > **Not recommended for production use** without thorough testing and understanding of the codebase. We welcome early adopters,
+ + testers, and contributors! Please report issues on our [issue tracker](https://github.com/dshills/gokeys/issues).
+
+A powerful, feature-rich Go library for building terminal user interfaces with comprehensive color support, text styling, and screen buffer management.
+
 
 ## Features
 
