@@ -12,7 +12,7 @@
  > - Features that may be refined or removed
  >
  > **Not recommended for production use** without thorough testing and understanding of the codebase. We welcome early adopters,
- + testers, and contributors! Please report issues on our [issue tracker](https://github.com/dshills/gokeys/issues).
+ + testers, and contributors!
 
 A powerful, feature-rich Go library for building terminal user interfaces with comprehensive color support, text styling, and screen buffer management.
 
